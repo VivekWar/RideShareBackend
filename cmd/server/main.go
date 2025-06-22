@@ -36,7 +36,7 @@ func main() {
     
     // Setup CORS
     c := cors.New(cors.Options{
-        AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
+        AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app", "https://jazzy-taffy-5ed7a2.netlify.app"},
         
         AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
         AllowedHeaders: []string{"*"},
