@@ -39,7 +39,11 @@ func main() {
         AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
         
         AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-        AllowedHeaders: []string{"*"},
+        AllowedHeaders: []string{   "Origin",
+        "Content-Type", 
+        "Accept",
+        "Authorization",
+        "X-Requested-With",},
         AllowCredentials: true,
     })
     r.Use(func(ctx *gin.Context) {
