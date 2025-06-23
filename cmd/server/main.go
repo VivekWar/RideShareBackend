@@ -37,7 +37,7 @@ func main() {
 
 	// Configure CORS with rs/cors
 	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://ridesharefrontend.vercel.app"},
+		AllowedOrigins:   []string{"https://ridesharefrontend.vercel.app","http://localhost:3000/login"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Authorization", "Content-Type", "Origin"},
 		ExposedHeaders:   []string{"Content-Length"},
