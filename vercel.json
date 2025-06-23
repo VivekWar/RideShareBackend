@@ -1,8 +1,9 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "builds": [
     {
-      "src": "cmd/server/main.go", 
+      "src": "cmd/server/main.go",
       "use": "@vercel/go"
     }
   ],
@@ -10,7 +11,7 @@
     {
       "src": "/api/(.*)",
       "dest": "cmd/server/main.go",
-      "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     }
   ],
   "headers": [
