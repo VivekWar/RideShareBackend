@@ -8,7 +8,7 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.9
-	github.com/rs/cors v1.10.1
+	github.com/gin-contrib/cors v1.7.5
 	golang.org/x/crypto v0.23.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )
