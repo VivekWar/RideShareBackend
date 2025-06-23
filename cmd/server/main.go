@@ -47,8 +47,12 @@ func main() {
         AllowCredentials: true,
     })
     r.Use(func(ctx *gin.Context) {
+    if ctx.Request.Method == "OPTIONS" {
         c.HandlerFunc(ctx.Writer, ctx.Request)
-        ctx.Next()
+        ctx.AbortWithStatus(204) // Critical: Stop further processing
+        return
+    }
+    ctx.Next()
     })
     
     // Initialize handlers
