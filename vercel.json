@@ -1,9 +1,27 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "cmd/server/main.go",  // Your entrypoint
+      "use": "@vercel/go"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/main.go",
+      "dest": "cmd/server/main.go",
       "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://ridesharefrontend.vercel.app" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
     }
   ]
 }
