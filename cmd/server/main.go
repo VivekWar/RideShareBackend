@@ -7,6 +7,7 @@ import (
     "rideshare-backend/internal/handlers"
     "os"
     "github.com/gin-gonic/gin"
+    "github.com/gin-contrib/cors"
     _ "github.com/lib/pq"
 )
 
@@ -46,6 +47,17 @@ func main() {
     ctx.Next()
 })
     // Setup CORS
+    c := cors.New(cors.Options{
+    AllowedOrigins:   []string{"https://ridesharefrontend.vercel.app"},
+    AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+    AllowedHeaders:   []string{"Authorization", "Content-Type"},
+    AllowCredentials: true,
+    Debug:            true,
+})
+r.Use(func(ctx *gin.Context) {
+    c.HandlerFunc(ctx.Writer, ctx.Request)
+    ctx.Next()
+})
       
     
     // Initialize handlers
