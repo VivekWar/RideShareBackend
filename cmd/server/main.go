@@ -33,32 +33,23 @@ func main() {
     
     // Initialize Gin router
     r := gin.Default()
-    r.Use(func(ctx *gin.Context) {
-    // Override Cloudflare's default CORS behavior
-    ctx.Header("Access-Control-Allow-Origin", "https://ridesharefrontend.vercel.app")
-    ctx.Header("Access-Control-Allow-Credentials", "true")
     
-    if ctx.Request.Method == "OPTIONS" {
-        ctx.Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-        ctx.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")
-        ctx.AbortWithStatus(204)
-        return
-    }
-    ctx.Next()
-})
     // Setup CORS
     c := cors.New(cors.Options{
-    AllowedOrigins:   []string{"https://ridesharefrontend.vercel.app"},
-    AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-    AllowedHeaders:   []string{"Authorization", "Content-Type"},
-    AllowCredentials: true,
-    Debug:            true,
-})
-r.Use(func(ctx *gin.Context) {
-    c.HandlerFunc(ctx.Writer, ctx.Request)
-    ctx.Next()
-})
-      
+        AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
+        
+        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowedHeaders: []string{   "Origin",
+        "Content-Type", 
+        "Accept",
+        "Authorization",
+        "X-Requested-With",},
+        AllowCredentials: true,
+    })
+    r.Use(func(ctx *gin.Context) {
+        c.HandlerFunc(ctx.Writer, ctx.Request)
+        ctx.Next()
+    })
     
     // Initialize handlers
     authHandler := handlers.NewAuthHandler(db, cfg)
