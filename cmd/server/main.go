@@ -33,7 +33,19 @@ func main() {
     
     // Initialize Gin router
     r := gin.Default()
+    r.Use(func(ctx *gin.Context) {
+    // Override Cloudflare's default CORS behavior
+    ctx.Header("Access-Control-Allow-Origin", "https://ridesharefrontend.vercel.app")
+    ctx.Header("Access-Control-Allow-Credentials", "true")
     
+    if ctx.Request.Method == "OPTIONS" {
+        ctx.Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
+        ctx.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+        ctx.AbortWithStatus(204)
+        return
+    }
+    ctx.Next()
+})
     // Setup CORS
        c := cors.New(cors.Options{
         AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
@@ -46,14 +58,7 @@ func main() {
         "X-Requested-With",},
         AllowCredentials: true,
     })
-    r.Use(func(ctx *gin.Context) {
-    if ctx.Request.Method == "OPTIONS" {
-        c.HandlerFunc(ctx.Writer, ctx.Request)
-        ctx.AbortWithStatus(204) // Critical: Stop further processing
-        return
-    }
-    ctx.Next()
-    })
+
     
     // Initialize handlers
     authHandler := handlers.NewAuthHandler(db, cfg)
