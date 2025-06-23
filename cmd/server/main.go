@@ -7,7 +7,7 @@ import (
     "rideshare-backend/internal/handlers"
     "os"
     "github.com/gin-gonic/gin"
-    "github.com/gin-contrib/cors"
+    "github.com/rs/cors"
     _ "github.com/lib/pq"
 )
 
