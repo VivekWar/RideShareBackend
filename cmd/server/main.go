@@ -62,7 +62,7 @@ func main() {
 	userHandler := handlers.NewUserHandler(db)
 	
 	// Setup routes
-	api := r.Group("/api/v1")
+	api := r.Group("/")
 	{
 		auth := api.Group("/auth")
 		{
