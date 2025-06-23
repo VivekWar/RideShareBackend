@@ -47,18 +47,7 @@ func main() {
     ctx.Next()
 })
     // Setup CORS
-       c := cors.New(cors.Options{
-        AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
-        
-        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-        AllowedHeaders: []string{   "Origin",
-        "Content-Type", 
-        "Accept",
-        "Authorization",
-        "X-Requested-With",},
-        AllowCredentials: true,
-    })
-
+      
     
     // Initialize handlers
     authHandler := handlers.NewAuthHandler(db, cfg)
