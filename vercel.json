@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/main.go",
+      "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"]
+    }
+  ]
+}
