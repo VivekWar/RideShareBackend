@@ -35,23 +35,19 @@ func main() {
     r := gin.Default()
     
     // Setup CORS
-        c := cors.New(cors.Options{
-        AllowedOrigins: []string{
-            "http://localhost:3000",
-            "https://ridesharefrontend.vercel.app",
-            "https://jazzy-taffy-5ed7a2.netlify.app" // Explicitly allow problematic origin
-        },
-        AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-        AllowedHeaders:   []string{"Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With"},
+       c := cors.New(cors.Options{
+        AllowedOrigins: []string{"http://localhost:3000","https://ridesharefrontend.vercel.app"},
+        
+        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowedHeaders: []string{   "Origin",
+        "Content-Type", 
+        "Accept",
+        "Authorization",
+        "X-Requested-With",},
         AllowCredentials: true,
-        Debug:            true, // Enable for troubleshooting
     })
-       r.Use(func(ctx *gin.Context) {
+    r.Use(func(ctx *gin.Context) {
         c.HandlerFunc(ctx.Writer, ctx.Request)
-        if ctx.Request.Method == "OPTIONS" {
-            ctx.AbortWithStatus(204)
-            return
-        }
         ctx.Next()
     })
     
